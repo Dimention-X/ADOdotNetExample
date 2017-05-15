@@ -65,6 +65,7 @@ namespace ExampleADOdotNet
         private void button6_Click(object sender, EventArgs e)     // Close Button
         {
             if (con.State != ConnectionState.Closed)
+
             {
                 con.Close();
                 this.Close();
@@ -73,7 +74,8 @@ namespace ExampleADOdotNet
 
         private void button3_Click(object sender, EventArgs e)   //insert button
         {
-            SQLstr = "Insert Into Employee(Eno,Ename,Job,Salary) Values(" + txtbxEmpno.Text + "," + txtbxEname.Text + "," + txtbxJob.Text + "," + txtbxSalary.Text + ")";
+          //  SQLstr = "Insert Into Employee(Eno,Ename,Job,Salary) Values(" + txtbxEmpno.Text + "," + txtbxEname.Text + "," + txtbxJob.Text + "," + txtbxSalary.Text + ")";
+            SQLstr = String.Format("Insert into Employee(Eno,Ename,Job,Salary) values('{0}','{1}','{2}','{3}')",txtbxEmpno.Text,txtbxEname.Text,txtbxJob.Text,txtbxSalary.Text);
             ExecuteDML();
 
             button3.Enabled = false;
@@ -106,7 +108,7 @@ namespace ExampleADOdotNet
             //SQLstr = "UPdate Employee set Ename=" + txtbxEname.Text + ",Job=" + txtbxJob.Text
             //    + ",Salary" + txtbxSalary.Text + "Where Eno=" + txtbxEmpno.Text;
 
-            SQLstr = String.Format("Update Employee set Ename = {0}, Job = {1} , Salary = {2} where Eno = {3}", txtbxEmpno);
+            SQLstr = String.Format("Update Employee set Ename = '{0}', Job = '{1}' , Salary = '{2}' where Eno = '{3}'",txtbxEname.Text,txtbxJob.Text,txtbxSalary.Text,txtbxEmpno.Text);
 
             dr.Close();
             ExecuteDML();
@@ -115,7 +117,7 @@ namespace ExampleADOdotNet
 
         private void button4_Click(object sender, EventArgs e)    //Delete Button
         {
-            SQLstr = String.Format("Delete from Employee where Eno={0}", txtbxEmpno.Text);
+            SQLstr = String.Format("Delete from Employee where Eno='{0}'", txtbxEmpno.Text);
             dr.Close();
             ExecuteDML();
         }
